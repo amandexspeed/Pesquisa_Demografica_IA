@@ -1,4 +1,4 @@
-﻿country_code;country_name;region;sub_region;intermediate_region;indicator_code;indicator_name;year;gdp_per_capita;gdp_variation
+﻿country_code3;country_name;region;sub_region;intermediate_region;indicator_code;indicator_name;year;gdp_per_capita;gdp_variation
 AFG;AFGANISTAN;ASIA MERIDIONAL;SOUTHERN ASIA;;NY.GDP.PCAP.CD;PIB PER CAPITA (US$ A PRECIOS ACTUALES);1960;0;0
 AFG;AFGANISTAN;ASIA MERIDIONAL;SOUTHERN ASIA;;NY.GDP.PCAP.CD;PIB PER CAPITA (US$ A PRECIOS ACTUALES);1961;0;0
 AFG;AFGANISTAN;ASIA MERIDIONAL;SOUTHERN ASIA;;NY.GDP.PCAP.CD;PIB PER CAPITA (US$ A PRECIOS ACTUALES);1962;0;0
