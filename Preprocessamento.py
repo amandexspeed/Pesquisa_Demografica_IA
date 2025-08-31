@@ -32,14 +32,17 @@ def mesclar_dados(df_PIB, df_DadosGlobais):
     print(f"Dados mesclados com sucesso !")
     return df_merged
 
-def converter_para_numerico(df_merged, numeric_cols):
-    """Converte colunas específicas para o tipo numérico, lidando com erros."""
+def converter_Milhar_para_numerico(df_merged, numeric_cols):
+    conversor_numerico(df_merged, numeric_cols,'.','')
+
+def converter_Decimal_para_numerico(df_merged, numeric_cols):
+    conversor_numerico(df_merged, numeric_cols,',','.')
+           
+def conversor_numerico(df_merged, numeric_cols,token_indesejado,token_substituto):
     for col in numeric_cols:
         if df_merged[col].dtype == object:
-            df_merged[col] = df_merged[col].astype(str).str.replace('.', '', regex=False)
-            df_merged[col] = pd.to_numeric(df_merged[col], errors='coerce')
-            
-    
+            df_merged[col] = df_merged[col].astype(str).str.replace(token_indesejado,token_substituto, regex=False)
+            df_merged[col] = pd.to_numeric(df_merged[col], errors='coerce')   
     
 def preprocessar_dados(df_PIB, df_DadosGlobais):
     global remover_outliers
@@ -56,11 +59,13 @@ def preprocessar_dados(df_PIB, df_DadosGlobais):
 
     df_dataset = mesclar_dados(df_PIB, df_DadosGlobais)
 
-    subset_cols = ['gdp_per_capita', 'gdp_variation', 'population', 'population_below_poverty_line',
-                   'hdi', 'expected_years_of_schooling', 'mean_years_of_schooling',
+    milhar_cols = ['gdp_per_capita', 'gdp_variation', 'population','gni']
+    
+    decimal_cols = ['hdi', 'life_expectancy','expected_years_of_schooling', 'mean_years_of_schooling',
                    'gni']
     
-    #converter_para_numerico(df_dataset, subset_cols)
+    converter_Milhar_para_numerico(df_dataset, milhar_cols)
+    converter_Decimal_para_numerico(df_dataset, decimal_cols)
 
     # Seleciona apenas as colunas numéricas para o PCA
     colunas_numericas = df_dataset.select_dtypes(include=[np.number]).columns
@@ -69,8 +74,8 @@ def preprocessar_dados(df_PIB, df_DadosGlobais):
     print(df_dataset.info())
 
     # Normalização dos dados numéricos
-    scaler = preprocessing.MinMaxScaler()
-    df_dataset[colunas_numericas] = scaler.fit_transform(df_dataset[colunas_numericas])
+    #scaler = preprocessing.MinMaxScaler()
+    #df_dataset[colunas_numericas] = scaler.fit_transform(df_dataset[colunas_numericas])
 
     if remover_outliers:
         outlier_detector = IsolationForest(contamination=0.1, random_state=42)
