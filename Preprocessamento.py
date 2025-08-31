@@ -14,7 +14,7 @@ def carregar_dados(url_PIB=url_PIB, url_DadosGlobais=url_DadosGlobais):
         # Carrega os dados usando pandas com separador vírgula e codificação UTF-8
         # Isso garante que os dados sejam lidos corretamente, especialmente se contiverem caracteres especiais
         df_PIB = pd.read_csv(url_PIB, sep=',',encoding='utf-8')
-        df_DadosGlobais = pd.read_csv(url_DadosGlobais, sep=',',encoding='utf-8')
+        df_DadosGlobais = pd.read_csv(url_DadosGlobais, sep=';',encoding='utf-8')
         print(f"Base de treinamento carregada com sucesso !") 
         return df_PIB, df_DadosGlobais
     except Exception as e:

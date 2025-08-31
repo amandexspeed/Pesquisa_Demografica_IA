@@ -1,4 +1,4 @@
-country_name;country_code;country_code3;continent;region;population;population_below_poverty_line;hdi;life_expectancy;expected_years_of_schooling;mean_years_of_schooling;gni;kiva_country_name
+ï»¿country_name;country_code;country_code3;continent;region;population;population_below_poverty_line;hdi;life_expectancy;expected_years_of_schooling;mean_years_of_schooling;gni;kiva_country_name
 India;IN;IND;Asia;Southern Asia;1339180127;21,9;0,623558794;68,322;11,69659;6,298833561;5663,474799;India
 Nigeria;NG;NGA;Africa;Western Africa;190886311;70;0,527104539;53,057;9,970482;6;5442,901264;Nigeria
 Mexico;MX;MEX;Americas;Central America;129163276;46,2;0,761682897;76,972;13,29909;8,554984833;16383,10668;Mexico
@@ -150,7 +150,7 @@ Malta;MT;MLT;Europe;Southern Europe;430835;16,3;0,855850775;80,726;14,59462;11,2
 Maldives;MV;MDV;Asia;Southern Asia;436330;16;0,7010269;76,959;12,746;6,196;10382,73306;Maldives
 Montenegro;ME;MNE;Europe;Southern Europe;628960;8,6;0,807224346;76,401;15,13368;11,28716;15409,60512;Montenegro
 Turkmenistan;TM;TKM;Asia;Central Asia;5758075;0,2;0,691490343;65,734;10,80122;9,87817;14025,83138;Turkmenistan
-Australia;AU;AUS;Oceania;Australia and New Zealand;24450561;;0,938679536;82,537;20,43272;13,1751;42822,19627;Australia
+Australia;AU;AUS;Oceania;AustraliaÂ andÂ New Zealand;24450561;;0,938679536;82,537;20,43272;13,1751;42822,19627;Australia
 Bahrain;BH;BHR;Asia;Western Asia;1492584;;0,823884095;76,715;14,5;9,419;37236,36304;Bahrain
 Brunei;BN;BRN;Asia;South-eastern Asia;428697;;0,86493671;79,019;14,94486;9,02;72843,46609;Brunei
 Cuba;CU;CUB;Americas;Caribbean;11484636;;0,774669359;79,573;13,93739;11,7507808;7455,062477;Cuba
@@ -159,7 +159,7 @@ Finland;FI;FIN;Europe;Northern Europe;5523231;;0,894517444;81,006;17,04792;11,19
 Iceland;IS;ISL;Europe;Northern Europe;335025;;0,921109598;82,724;18,99422;12,19089155;37065,21451;Iceland
 Kuwait;KW;KWT;Asia;Western Asia;4136528;;0,800182932;74,549;13,26;7,265368804;76075,20735;Kuwait
 Luxembourg;LU;LUX;Europe;Western Europe;583455;;0,898464721;81,881;13,86373;11,95083323;62470,59129;Luxembourg
-New Zealand;NZ;NZL;Oceania;Australia and New Zealand;4705818;;0,914900056;82,026;19,2282;12,503;32870,07836;New Zealand
+New Zealand;NZ;NZL;Oceania;AustraliaÂ andÂ New Zealand;4705818;;0,914900056;82,026;19,2282;12,503;32870,07836;New Zealand
 North Korea;KP;PRK;Asia;Eastern Asia;25490965;;;;;;;North Korea
 Norway;NO;NOR;Europe;Northern Europe;5305383;;0,949422834;81,711;17,67187;12,74642;67614,35348;Norway
 Oman;OM;OMN;Asia;Western Asia;4636262;;0,795778615;76,97;13,74085;8,1;34402,2755;Oman
