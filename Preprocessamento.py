@@ -44,8 +44,10 @@ def conversor_numerico(df_merged, numeric_cols,token_indesejado,token_substituto
             df_merged[col] = df_merged[col].astype(str).str.replace(token_indesejado,token_substituto, regex=False)
             df_merged[col] = pd.to_numeric(df_merged[col], errors='coerce')   
     
-def preprocessar_dados(df_PIB, df_DadosGlobais):
+def preprocessar_dados():
     global remover_outliers
+
+    df_PIB, df_DadosGlobais = carregar_dados()
     """Realiza o pré-processamento dos dados."""
     if df_PIB is None or df_DadosGlobais is None:
         print("Erro: Dados não carregados corretamente.")
@@ -59,19 +61,16 @@ def preprocessar_dados(df_PIB, df_DadosGlobais):
 
     df_dataset = mesclar_dados(df_PIB, df_DadosGlobais)
 
-    milhar_cols = ['gdp_per_capita', 'gdp_variation', 'population','gni']
-    
-    decimal_cols = ['hdi', 'life_expectancy','expected_years_of_schooling', 'mean_years_of_schooling',
+    num_cols = ['gdp_per_capita', 'gdp_variation', 'population','gni','hdi', 'life_expectancy','expected_years_of_schooling', 'mean_years_of_schooling',
                    'gni']
     
-    converter_Milhar_para_numerico(df_dataset, milhar_cols)
-    converter_Decimal_para_numerico(df_dataset, decimal_cols)
+    #converter_Milhar_para_numerico(df_dataset, milhar_cols)
+    converter_Decimal_para_numerico(df_dataset, num_cols)
 
     # Seleciona apenas as colunas numéricas para o PCA
     colunas_numericas = df_dataset.select_dtypes(include=[np.number]).columns
 
     df_dataset = df_dataset[(df_dataset[['year']] >= 2019).all(axis=1)]
-    print(df_dataset.info())
 
     # Normalização dos dados numéricos
     scaler = preprocessing.MinMaxScaler()
@@ -88,8 +87,7 @@ def preprocessar_dados(df_PIB, df_DadosGlobais):
     return df_dataset
 
 def main():
-    df_PIB, df_DadosGlobais = carregar_dados()
-    df_dataset = preprocessar_dados(df_PIB, df_DadosGlobais)
+    df_dataset = preprocessar_dados()
     print(df_dataset.info())
     print(df_dataset["gdp_per_capita"])
     print(df_dataset["life_expectancy"])
