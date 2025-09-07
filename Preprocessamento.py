@@ -4,7 +4,7 @@ from sklearn import preprocessing
 from sklearn.preprocessing import Binarizer
 from sklearn.ensemble import IsolationForest
 
-remover_outliers = False
+remover_outliers = True
 url_DadosGlobais = "https://raw.githubusercontent.com/amandexspeed/Pesquisa_Demografica_IA/refs/heads/main/DadosGlobais.csv"
 url_PIB = "https://raw.githubusercontent.com/amandexspeed/Pesquisa_Demografica_IA/refs/heads/main/PIB.csv"
 
@@ -27,21 +27,14 @@ def mesclar_dados(df_PIB, df_DadosGlobais):
         print("Erro: Dados não carregados corretamente.")
         return None
     
-    
     df_merged = pd.merge(df_PIB, df_DadosGlobais, on='country_code3', how='inner')
     print(f"Dados mesclados com sucesso !")
     return df_merged
 
-def converter_Milhar_para_numerico(df_merged, numeric_cols):
-    conversor_numerico(df_merged, numeric_cols,'.','')
-
 def converter_Decimal_para_numerico(df_merged, numeric_cols):
-    conversor_numerico(df_merged, numeric_cols,',','.')
-           
-def conversor_numerico(df_merged, numeric_cols,token_indesejado,token_substituto):
     for col in numeric_cols:
         if df_merged[col].dtype == object:
-            df_merged[col] = df_merged[col].astype(str).str.replace(token_indesejado,token_substituto, regex=False)
+            df_merged[col] = df_merged[col].astype(str).str.replace(',','.', regex=False)
             df_merged[col] = pd.to_numeric(df_merged[col], errors='coerce')   
     
 def preprocessar_dados():
@@ -64,7 +57,6 @@ def preprocessar_dados():
     num_cols = ['gdp_per_capita', 'gdp_variation', 'population','gni','hdi', 'life_expectancy','expected_years_of_schooling', 'mean_years_of_schooling',
                    'gni']
     
-    #converter_Milhar_para_numerico(df_dataset, milhar_cols)
     converter_Decimal_para_numerico(df_dataset, num_cols)
 
     # Seleciona apenas as colunas numéricas para o PCA
@@ -72,15 +64,15 @@ def preprocessar_dados():
 
     df_dataset = df_dataset[(df_dataset[['year']] >= 2019).all(axis=1)]
 
-    # Normalização dos dados numéricos
-    scaler = preprocessing.MinMaxScaler()
-    df_dataset[colunas_numericas] = scaler.fit_transform(df_dataset[colunas_numericas])
-
     if remover_outliers:
         outlier_detector = IsolationForest(contamination=0.1, random_state=42)
         outliers_dados = outlier_detector.fit_predict(df_dataset[colunas_numericas]) == -1
 
         df_dataset = df_dataset[~outliers_dados]
+
+    # Normalização dos dados numéricos
+    scaler = preprocessing.MinMaxScaler()
+    df_dataset[colunas_numericas] = scaler.fit_transform(df_dataset[colunas_numericas])
 
     print(f"Pré-processamento concluído com sucesso !")
 
